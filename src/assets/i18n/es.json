@@ -1,3 +1,9 @@
 {
+    "header": {
+        "songs": "Canciones",
+        "new-song": "Nueva canción"
+
+
+    },
     "submit.label": "Enviar"
 }

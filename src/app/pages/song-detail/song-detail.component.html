@@ -1,1 +1,12 @@
-<p>song-detail works!</p>
+<div class="p-4">
+  <div>
+    {{ song.title }}
+  </div>
+  <div>
+    <img mat-card-image src="{{ song.poster }}" alt="" />
+  </div>
+  <div>
+
+  </div>
+</div>
+<app-float-button (deleteSongEmiter)="deleteSong()" [editRemoveId]="songId" class="float-bar w-full"> </app-float-button>

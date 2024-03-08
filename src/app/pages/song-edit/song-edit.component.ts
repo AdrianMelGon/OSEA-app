@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-// import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiServiceService } from './../../services';
@@ -22,9 +21,6 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-song-edit',
   standalone: true,
   imports: [
-    // MatSelectCountryModule.forRoot('de'),
-    // HttpClientModule,
-
     CommonModule,
     FormsModule,
     MatSlideToggleModule,
@@ -35,7 +31,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatInputModule,
     MatChipsModule,
-    // BrowserAnimationsModule
   ],
   providers: [],
   templateUrl: './song-edit.component.html',
@@ -80,7 +75,7 @@ export class SongEditComponent {
         next: (data) => {
           this.song = data;
           const artist = this.artists.find(
-            (artist) => artist.id === this.song.artist.toString()
+            (artist) => artist.id === this.song.artist
           );
 
           this.form.patchValue({
