@@ -4,6 +4,7 @@ import {
   CompaniesComponent,
   SongsComponent,
   SongDetailComponent,
+  SongEditComponent
 } from './pages';
 
 export const routes: Routes = [
@@ -23,10 +24,17 @@ export const routes: Routes = [
             path: '',
             component: SongsComponent,
           },
+          {
+            path: 'edit/:id',
+            component: SongEditComponent,
+          },
         {
             path: ':id',
-            component: SongDetailComponent,
+            component: SongEditComponent,
           },
+
+
+          
     ]
   },
 ];

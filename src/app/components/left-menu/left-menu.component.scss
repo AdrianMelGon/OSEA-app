@@ -1,27 +1,26 @@
-
-
 .menu-container {
-    display: flex;
-    width: 100vw;   
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: -100vh;
+  transition: all 0.5s linear;
+  .left-menu {
+
     height: 100vh;
-    position: absolute;
-    z-index: 1;
-    top: 0px;
-    left: -100vh;
-    transition: all 0.5s linear;
-    .left-menu {
-        height: 100vh;
-        flex: 0 0 300px;
-        background-color: green;
-        z-index: 2;
-    
+    flex: 0 0 300px;
+    z-index: 2;
+    & .section{
+        padding: 8px;
     }
-    .under-lay {
-        flex: 1
-    }
+  }
+  .under-lay {
+    flex: 1;
+  }
 
-
-    &.display {
-        left: 0px;
-    }
+  &.display {
+    left: 0px;
+  }
 }
