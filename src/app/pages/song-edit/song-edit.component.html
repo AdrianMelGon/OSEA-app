@@ -1,7 +1,7 @@
 <div *ngIf="artists.length > 0">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
     <div class="">
-      <mat-form-field appearance="fill" class="w-screen">
+      <mat-form-field class="w-full">
         <mat-label>title</mat-label>
         <input matInput formControlName="title" placeholder="title" />
         <!-- <mat-error *ngIf="form.get('title')?.hasError('required')"
@@ -10,14 +10,14 @@
       </mat-form-field>
     </div>
     <div class="">
-      <!-- <mat-form-field appearance="fill" class="w-screen">
+      <!-- <mat-form-field class="w-full">
         <mat-label>year</mat-label>
         <input type="number" matInput formControlName="year" placeholder="year" />
         <mat-error *ngIf="form.get('year')?.hasError('required')"
           >Year</mat-error
         >
       </mat-form-field> -->
-      <mat-form-field appearance="fill">
+      <mat-form-field class="w-full">
         <mat-label>Choose a date</mat-label>
         <input matInput [matDatepicker]="year" />
         <mat-datepicker-toggle
@@ -28,7 +28,7 @@
       </mat-form-field>
     </div>
     <div class="">
-      <mat-form-field appearance="fill" class="w-screen">
+      <mat-form-field class="w-full">
         <mat-label>rating</mat-label>
         <input
           type="number"
@@ -42,7 +42,7 @@
       </mat-form-field>
     </div>
     <div class="">
-      <mat-form-field appearance="fill" class="w-screen">
+      <mat-form-field class="w-full">
         <mat-label>duration</mat-label>
         <input
           type="number"
@@ -56,7 +56,7 @@
       </mat-form-field>
     </div>
     <div class="">
-      <mat-form-field appearance="fill" class="w-screen">
+      <mat-form-field class="w-full">
         <!-- <mat-label>Dropdown</mat-label> -->
         <mat-select
           formControlName="artist"
@@ -72,7 +72,7 @@
       </mat-form-field>
     </div>
     <div class="">
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label>Añadir nuevo valor</mat-label>
         <input matInput formControlName="newGenre" placeholder="Nuevo valor" />
         <mat-error *ngIf="form.get('newGenre')?.hasError('required')"

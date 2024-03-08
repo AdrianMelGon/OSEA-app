@@ -28,13 +28,14 @@ export const routes: Routes = [
             path: 'edit/:id',
             component: SongEditComponent,
           },
-        {
-            path: ':id',
+          {
+            path: 'edit',
             component: SongEditComponent,
           },
-
-
-          
+        {
+            path: ':id',
+            component: SongDetailComponent,
+          },
     ]
   },
 ];

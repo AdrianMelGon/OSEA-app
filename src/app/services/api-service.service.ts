@@ -47,6 +47,10 @@ export class ApiServiceService {
     return this.http.post<any[]>(`${this.songsURL}`, body);
   }
 
+  deleteSongById(id: string): Observable<any[]> {
+    return this.http.delete<any[]>(`${this.songsURL}/${id}`);
+  }
+
   updateSong(id: string, body: any): Observable<any[]> {
     return this.http.put<any[]>(`${this.songsURL}/${id}`, body);
   }

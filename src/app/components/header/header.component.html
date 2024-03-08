@@ -1,10 +1,10 @@
 <div class="flex p-4 border-b border-gray-500">
-    <fa-icon [icon]="faBars"></fa-icon>
+    <fa-icon [icon]="faBars" (click)="openModal()"></fa-icon>
+
     <div class="">
-        <button (click)="openModal()">Botón</button>
-    </div>
-    <div class="">
-        {{ 'submit.label' | transloco }}
-        Texto
+        {{ headerText | transloco }}
+
+
+        <!-- {{ 'submit.label' | transloco }} -->
     </div>
 </div>
