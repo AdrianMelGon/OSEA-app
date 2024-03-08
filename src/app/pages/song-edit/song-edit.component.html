@@ -1,0 +1,97 @@
+<div *ngIf="artists.length > 0">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="">
+      <mat-form-field appearance="fill" class="w-screen">
+        <mat-label>title</mat-label>
+        <input matInput formControlName="title" placeholder="title" />
+        <!-- <mat-error *ngIf="form.get('title')?.hasError('required')"
+          >Title is required</mat-error
+        > -->
+      </mat-form-field>
+    </div>
+    <div class="">
+      <!-- <mat-form-field appearance="fill" class="w-screen">
+        <mat-label>year</mat-label>
+        <input type="number" matInput formControlName="year" placeholder="year" />
+        <mat-error *ngIf="form.get('year')?.hasError('required')"
+          >Year</mat-error
+        >
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="year" />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="year"
+        ></mat-datepicker-toggle>
+        <mat-datepicker startView="multi-year" #year></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="">
+      <mat-form-field appearance="fill" class="w-screen">
+        <mat-label>rating</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="rating"
+          placeholder="rating"
+        />
+        <!-- <mat-error *ngIf="form.get('rating')?.hasError('required')"
+          >rating</mat-error
+        > -->
+      </mat-form-field>
+    </div>
+    <div class="">
+      <mat-form-field appearance="fill" class="w-screen">
+        <mat-label>duration</mat-label>
+        <input
+          type="number"
+          matInput
+          formControlName="duration"
+          placeholder="duration"
+        />
+        <!-- <mat-error *ngIf="form.get('duration')?.hasError('required')"
+          >duration</mat-error
+        > -->
+      </mat-form-field>
+    </div>
+    <div class="">
+      <mat-form-field appearance="fill" class="w-screen">
+        <!-- <mat-label>Dropdown</mat-label> -->
+        <mat-select
+          formControlName="artist"
+          placeholder="Selecciona una opción"
+        >
+          <mat-option *ngFor="let singer of artists" [value]="singer.id">{{
+            singer.name
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('artist')?.hasError('required')"
+          >Debes seleccionar una opción</mat-error
+        >
+      </mat-form-field>
+    </div>
+    <div class="">
+      <mat-form-field appearance="fill">
+        <mat-label>Añadir nuevo valor</mat-label>
+        <input matInput formControlName="newGenre" placeholder="Nuevo valor" />
+        <mat-error *ngIf="form.get('newGenre')?.hasError('required')"
+          >El nuevo valor es requerido</mat-error
+        >
+      </mat-form-field>
+      <button type="button" mat-raised-button (click)="addNewGenre()">
+        Añadir
+      </button>
+    </div>
+
+    <mat-chip-listbox>
+      <mat-chip
+        type="button"
+        *ngFor="let value of newGenres; let i = index"
+        (click)="deleteValue(i)"
+        >{{ value }}</mat-chip
+      >
+    </mat-chip-listbox>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</div>

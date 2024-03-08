@@ -1,6 +1,9 @@
 <div class="menu-container" [ngClass]="{'display': displayMenu}">
-  <div class="left-menu">
-      <div *ngFor="let section of sections" (click)="navigate(section.url)">
+  <div class="left-menu bg-white pr-4 border-gray-500">
+    <div class="p-4 mb-16">
+      Menu
+    </div>
+      <div *ngFor="let section of sections" (click)="navigate(section.url)" class="p-4 border-b border-gray-500">
           {{section.label}}
       </div>
   </div>
