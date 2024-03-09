@@ -1,6 +1,13 @@
-<!-- <main class="main"></main> -->
-<app-loading *ngIf="displayLoading"></app-loading>
-<app-header></app-header>
-<app-left-menu></app-left-menu>
+<div
+  class="hidden md:flex h-screen w-screen bg-slate-400 text-white font-semibold items-center justify-center"
+>
+  {{ "apologyze.mobile-only" | transloco }}
+</div>
+<div class="sm:block md:hidden">
+  <app-header ></app-header>
+  <app-loading [ngClass]="displayLoading ? 'block' : 'hidden'"></app-loading>
+  <app-left-menu class="fixed w-full z-20 top-0"></app-left-menu>
 
-<router-outlet />
+  <router-outlet />
+</div>
+

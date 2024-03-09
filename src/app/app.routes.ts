@@ -18,7 +18,6 @@ export const routes: Routes = [
   },
   {
     path: 'songs',
-    // component: SongsComponent,
     children: [
         {
             path: '',

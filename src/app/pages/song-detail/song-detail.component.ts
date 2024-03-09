@@ -1,12 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiServiceService, NavigationService} from './../../services';
+import { ApiServiceService, NavigationService } from './../../services';
 import { FloatButtonComponent } from './../../components';
+import { CommonModule } from '@angular/common';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-song-detail',
   standalone: true,
-  imports: [FloatButtonComponent],
+  imports: [CommonModule, FloatButtonComponent, MatChipsModule],
   templateUrl: './song-detail.component.html',
   styleUrl: './song-detail.component.scss',
 })
@@ -14,10 +16,9 @@ export class SongDetailComponent {
   public songId = '';
   public song = <any>null;
   public artists = <any[]>[];
-
+  artist?: any;
   private _apiServiceService: ApiServiceService = inject(ApiServiceService);
   private _navigationService: NavigationService = inject(NavigationService);
-
 
   constructor(private route: ActivatedRoute) {}
 
@@ -37,9 +38,10 @@ export class SongDetailComponent {
       this._apiServiceService.getSongById(url[url.length - 1].path).subscribe({
         next: (data) => {
           this.song = data;
+          this._apiServiceService.setCurrentSong(this.song.title);
           this.songId = this.song.id.toString();
-          const artist = this.artists.find(
-            (artist) => artist.id === this.song.artist.toString()
+          this.artist = this.artists.find(
+            (artist) => artist.id === this.song.artist
           );
         },
         error: (err) => console.error(err),
@@ -54,8 +56,7 @@ export class SongDetailComponent {
       next: (response) => console.log(response),
       error: (err) => console.error(err),
       complete: () => {
-        // this._apiServiceService.setLoadingStatus(false)
-        this._navigationService.navigate('songs')
+        this._navigationService.navigate('songs');
       },
     });
   }

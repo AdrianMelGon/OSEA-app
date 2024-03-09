@@ -9,11 +9,14 @@ import { CommonModule } from '@angular/common';
 import { ApiServiceService, NavigationService} from './services';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { TranslocoModule } from '@ngneat/transloco';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
+    TranslocoModule,
     RouterOutlet,
     HeaderComponent,
     LeftMenuComponent,
@@ -27,10 +30,18 @@ export class AppComponent {
   private _navigationService: NavigationService = inject(NavigationService);
 
   
-  public displayLoading: boolean = false;
+  public displayLoading: boolean = true;
   title = 'OSEA';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this._apiServiceService
+    .getLoadingStatus()
+    .subscribe((data) => {
+      setTimeout(()=> {
+        this.displayLoading = data
+      },100)
+      });
+  }
 
   ngOnInit() {
     this.router.events
@@ -39,8 +50,6 @@ export class AppComponent {
         this._navigationService.setUrl(event.url)
       });
 
-    this._apiServiceService
-      .getLoadingStatus()
-      .subscribe((data) => (this.displayLoading = data));
+
   }
 }

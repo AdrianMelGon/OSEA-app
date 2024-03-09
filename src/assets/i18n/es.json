@@ -1,9 +1,14 @@
 {
     "header": {
         "songs": "Canciones",
+        "artists": "Artistas",
+        "companies": "Compañías discográficas",
+
         "new-song": "Nueva canción"
-
-
+    },
+    "apologyze": {
+        "page-in-progress": "Página temporalmente no disponible. Disculpa el inconveniente.",
+        "mobile-only": "Esta aplicación sólo está disponible en dispositivos móviles. Disculpa las molestias."
     },
     "submit.label": "Enviar"
 }

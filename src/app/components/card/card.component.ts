@@ -16,11 +16,6 @@ export class CardComponent {
 
   @Input() item: any; 
 
-  ngOnChanges() {
-    console.log(this.item)
-  }
-
-  
   navigate(url: string) {
     this._router.navigate([`songs/${url}`])
   }

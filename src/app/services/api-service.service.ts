@@ -10,13 +10,12 @@ export class ApiServiceService {
   private http: HttpClient = inject(HttpClient);
 
   private isLoadingDisplayed$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  private currentSongName$: BehaviorSubject<string> = new BehaviorSubject<string>('')
 
 
   private artistsURL = 'http://localhost:3000/artists';
   private songsURL = 'http://localhost:3000/songs';
   private companiesURL = 'http://localhost:3000/companies';
-
-  // constructor(private http: HttpClient) {}
 
   getLoadingStatus() {
     return this.isLoadingDisplayed$.asObservable();
@@ -24,6 +23,14 @@ export class ApiServiceService {
 
   setLoadingStatus(value: boolean) {
     this.isLoadingDisplayed$.next(value)
+  }
+
+  getCurrentSong() {
+    return this.currentSongName$.asObservable();
+  }
+
+  setCurrentSong(value: string) {
+    this.currentSongName$.next(value)
   }
 
   getArtists(): Observable<any[]> {

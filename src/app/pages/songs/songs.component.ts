@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { ApiServiceService } from './../../services';
 import { CardComponent, FloatButtonComponent } from './../../components';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-songs',
@@ -12,17 +11,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './songs.component.scss',
 })
 export class SongsComponent {
-  public songs = <any[]>([]);
-  // private _apiServiceService: ApiServiceService = inject(ApiServiceService);
-
+  public songs = <any[]>[];
   constructor(private _apiServiceService: ApiServiceService) {}
-
   ngOnInit(): void {
-    this._apiServiceService.setLoadingStatus(true)
+    this._apiServiceService.setLoadingStatus(true);
     this._apiServiceService.getSongs().subscribe({
-      next: (data) => this.songs = data,
+      next: (data) => (this.songs = data),
       error: (err) => console.error(err),
-      complete: () => this._apiServiceService.setLoadingStatus(false)
+      complete: () => this._apiServiceService.setLoadingStatus(false),
     });
   }
 }

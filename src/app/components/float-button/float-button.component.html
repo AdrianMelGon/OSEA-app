@@ -1,12 +1,11 @@
 <div class="flex w-full justify-end">
-    <div *ngIf="add" class="song-action flex items-center justify-center m-4" (click)="navigate('songs/edit', true)">
+    <div *ngIf="add" class="song-action flex items-center justify-center m-4 border-gray-500" (click)="navigate('songs/edit', true)">
         <fa-icon [icon]="faPlus"></fa-icon>
     </div>
-    <div *ngIf="editRemoveId" class="song-action flex items-center justify-center m-4" (click)="navigate('songs/edit', false)">
+    <div *ngIf="editRemoveId" class="song-action flex items-center justify-center m-4 border-gray-500" (click)="navigate('songs/edit', false)">
         <fa-icon [icon]="faPen"></fa-icon>
     </div>
-    <div *ngIf="editRemoveId" class="song-action flex items-center justify-center m-4" (click)="deleteSong()">
+    <div *ngIf="editRemoveId" class="song-action flex items-center justify-center m-4 border-gray-500" (click)="deleteSong()">
         <fa-icon [icon]="faTrash"></fa-icon>
     </div>
-
 </div>
