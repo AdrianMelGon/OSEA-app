@@ -19,7 +19,7 @@
       </mat-form-field> -->
       <mat-form-field class="w-full">
         <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="year" />
+        <input matInput formControlName="year" [matDatepicker]="year" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="year"
@@ -67,19 +67,25 @@
           }}</mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('artist')?.hasError('required')"
-          >Debes seleccionar una opción</mat-error
+          >Debes seleccionar un cantante</mat-error
         >
       </mat-form-field>
     </div>
-    <div class="">
+    <div class="flex items-center">
       <mat-form-field>
-        <mat-label>Añadir nuevo valor</mat-label>
+        <mat-label>Añadir nuevo estilo</mat-label>
         <input matInput formControlName="newGenre" placeholder="Nuevo valor" />
         <mat-error *ngIf="form.get('newGenre')?.hasError('required')"
           >El nuevo valor es requerido</mat-error
         >
       </mat-form-field>
-      <button type="button" mat-raised-button (click)="addNewGenre()">
+      <button
+        class="ml-4"
+        type="button"
+        mat-raised-button
+        color="primary"
+        (click)="addNewGenre()"
+      >
         Añadir
       </button>
     </div>
@@ -92,6 +98,9 @@
         >{{ value }}</mat-chip
       >
     </mat-chip-listbox>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+
+    <div class="flex p-8 justify-center">
+      <button class="w-full" mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
   </form>
 </div>

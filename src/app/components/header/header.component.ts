@@ -1,5 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { MenuServiceService, NavigationService } from './../../services';
+import {
+  MenuServiceService,
+  NavigationService,
+  ApiServiceService,
+} from './../../services';
 import { TranslocoModule } from '@ngneat/transloco';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -12,26 +16,40 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent {
   faBars = faBars;
-  private url = '';
-  public headerText = ''
+  public headerText = '';
   private _menuServiceService: MenuServiceService = inject(MenuServiceService);
   private _navigationService: NavigationService = inject(NavigationService);
+  private _apiServiceService: ApiServiceService = inject(ApiServiceService);
 
   ngOnInit() {
     this._navigationService.getUrl().subscribe((data) => {
-      
-      const segments = data.split('/')
-      const lastSegment = segments[segments.length - 1]
-
-      if (lastSegment === 'edit') {
-        this.headerText = 'header.new-song'
-      } else if (lastSegment === 'songs') {
-        this.headerText = 'header.songs'
+      const segments = data.split('/');
+      const lastSegment = segments[segments.length - 1];
+      if (segments[segments.length - 2] === 'songs' && lastSegment !== 'edit') {
+        this._apiServiceService.getCurrentSong().subscribe((data) => {
+          this.headerText = data;
+        });
       } else {
-        this.headerText = ''
+        // const lastSegment = segments[segments.length - 1]
+
+        switch (lastSegment) {
+          case 'edit':
+            this.headerText = 'header.new-song';
+            break;
+          case 'songs':
+            this.headerText = 'header.songs';
+            break;
+          case 'artists':
+            this.headerText = 'header.artists';
+            break;
+          case 'companies':
+            this.headerText = 'header.companies';
+            break;
+          case '':
+            this.headerText = '';
+            break;
+        }
       }
-    
-    
     });
   }
 

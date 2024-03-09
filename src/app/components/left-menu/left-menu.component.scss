@@ -3,7 +3,7 @@
   width: 100vw;
   height: 100vh;
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   top: 0px;
   left: -100vh;
   transition: all 0.5s linear;
@@ -11,7 +11,7 @@
 
     height: 100vh;
     flex: 0 0 300px;
-    z-index: 2;
+    z-index: 4;
     & .section{
         padding: 8px;
     }

@@ -7,16 +7,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import { HttpClientModule } from '@angular/common/http';
-
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-song-edit',
   standalone: true,
@@ -31,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     MatInputModule,
     MatChipsModule,
+    MatButtonModule,
   ],
   providers: [],
   templateUrl: './song-edit.component.html',
@@ -50,7 +47,7 @@ export class SongEditComponent {
   ) {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
-      year: [0, Validators.required],
+      year: [Validators.required],
       rating: [0, Validators.required],
       duration: [0, Validators.required],
       artist: [0, Validators.required],
@@ -74,16 +71,17 @@ export class SongEditComponent {
       this._apiServiceService.getSongById(url[url.length - 1].path).subscribe({
         next: (data) => {
           this.song = data;
+          this._apiServiceService.setCurrentSong(this.song.title);
           const artist = this.artists.find(
             (artist) => artist.id === this.song.artist
           );
 
           this.form.patchValue({
             title: this.song.title,
-            year: this.song.year,
+            year: new Date(parseInt(this.song.year, 10), 0),
             rating: this.song.rating,
             duration: this.song.duration,
-            artist: artist.name,
+            artist: artist.id,
           });
 
           this.newGenres = this.song.genre;
@@ -92,7 +90,6 @@ export class SongEditComponent {
         complete: () => this._apiServiceService.setLoadingStatus(false),
       });
     }
-    console.log(this.artists);
     this.cdr.detectChanges();
   }
 
@@ -106,11 +103,9 @@ export class SongEditComponent {
 
   deleteValue(index: number) {
     this.newGenres.splice(index, 1);
-    console.log(this.artists);
   }
 
   onSubmit() {
-    console.log(this.form.value);
     if (this.form.valid) {
       let body = this.form.value;
       delete body.newGenre;
@@ -131,8 +126,6 @@ export class SongEditComponent {
           complete: () => this._apiServiceService.setLoadingStatus(false),
         });
       }
-    } else {
-      //Todo
-    }
+    } 
   }
 }

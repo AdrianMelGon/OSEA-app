@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-companies',
   standalone: true,
-  imports: [],
+  imports: [TranslocoModule],
   templateUrl: './companies.component.html',
   styleUrl: './companies.component.scss'
 })

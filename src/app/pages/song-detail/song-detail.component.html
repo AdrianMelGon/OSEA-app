@@ -1,12 +1,30 @@
-<div class="p-4">
-  <div>
+<div class="p-4" *ngIf="song">
+  <div class="p-4 text-xl font-medium">
     {{ song.title }}
   </div>
-  <div>
+  <div class="mb-4">
     <img mat-card-image src="{{ song.poster }}" alt="" />
   </div>
-  <div>
+  <!-- <div class=""></div> -->
 
+  <mat-chip-listbox>
+    <mat-chip type="button" *ngFor="let value of song.genre; let i = index">#{{
+      value
+    }}</mat-chip>
+  </mat-chip-listbox>
+
+  <div class="border-b border-gray-300" *ngIf="artist">
+    <div class="pb-2 pt-2 font-medium">Artist</div>
+    <div class="pb-2">{{ artist.name }}</div>
+  </div>
+  <div class="border-b border-gray-300">
+    <div class="pb-2 pt-2 font-medium">Year</div>
+    <div class="pb-2">{{ song.year }}</div>
   </div>
 </div>
-<app-float-button (deleteSongEmiter)="deleteSong()" [editRemoveId]="songId" class="float-bar w-full"> </app-float-button>
+<app-float-button
+  (deleteSongEmiter)="deleteSong()"
+  [editRemoveId]="songId"
+  class="w-full fixed bottom-0 p-4 flex"
+>
+</app-float-button>
