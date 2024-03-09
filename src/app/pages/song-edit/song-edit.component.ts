@@ -106,26 +106,31 @@ export class SongEditComponent {
   }
 
   onSubmit() {
-    if (this.form.valid) {
+    // if (this.form.valid) {
       let body = this.form.value;
       delete body.newGenre;
+      const year = this.form.get('year')?.value;
+      body.year = year.getFullYear();
+
+
+
       body.genre = this.newGenres;
       this._apiServiceService.setLoadingStatus(true);
-      if (this.song) {
-        //Update song
-        this._apiServiceService.updateSong(this.song.id, body).subscribe({
-          next: (resp) => console.log(resp),
-          error: (err) => console.log(err),
-          complete: () => this._apiServiceService.setLoadingStatus(false),
-        });
-      } else {
-        //Create song
-        this._apiServiceService.createSong(body).subscribe({
-          next: (resp) => console.log(resp),
-          error: (err) => console.log(err),
-          complete: () => this._apiServiceService.setLoadingStatus(false),
-        });
-      }
-    } 
+      // if (this.song) {
+      //   //Update song
+      //   this._apiServiceService.updateSong(this.song.id, body).subscribe({
+      //     next: (resp) => console.log(resp),
+      //     error: (err) => console.log(err),
+      //     complete: () => this._apiServiceService.setLoadingStatus(false),
+      //   });
+      // } else {
+      //   //Create song
+      //   this._apiServiceService.createSong(body).subscribe({
+      //     next: (resp) => console.log(resp),
+      //     error: (err) => console.log(err),
+      //     complete: () => this._apiServiceService.setLoadingStatus(false),
+      //   });
+      // }
+    // } 
   }
 }
