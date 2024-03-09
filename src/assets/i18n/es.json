@@ -15,7 +15,7 @@
         "title": "Título",
         "title-error": "El campo título es obligatorio",
         "poster": "Poster",
-        "poster-error": "El poster título es obligatorio",
+        "poster-error": "El campo poster es obligatorio",
         "poster-song": "Poster de la canción",
         "year": "Año",
         "year-error": "El campo año es obligatorio",

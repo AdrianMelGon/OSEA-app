@@ -51,7 +51,7 @@ export class SongEditComponent {
   ) {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
-      poster: [Validators.required],
+      poster: ['', Validators.required],
       year: [Validators.required],
       rating: [0, Validators.required],
       duration: [0, Validators.required],
