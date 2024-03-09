@@ -41,25 +41,24 @@ export class ApiServiceService {
     return this.http.get<any[]>(this.songsURL);
   }
 
-  getSongById(id: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.songsURL}/${id}`);
+  getSongById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.songsURL}/${id}`);
   }
-
 
   getCompanies(): Observable<any[]> {
     return this.http.get<any[]>(this.companiesURL);
   }
 
-  createSong(body: any): Observable<any[]> {
-    return this.http.post<any[]>(`${this.songsURL}`, body);
+  createSong(body: any): Observable<any> {
+    return this.http.post<any>(`${this.songsURL}`, body);
   }
 
-  deleteSongById(id: string): Observable<any[]> {
-    return this.http.delete<any[]>(`${this.songsURL}/${id}`);
+  deleteSongById(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.songsURL}/${id}`);
   }
 
-  updateSong(id: string, body: any): Observable<any[]> {
-    return this.http.put<any[]>(`${this.songsURL}/${id}`, body);
+  updateSong(id: string, body: any): Observable<any> {
+    return this.http.put<any>(`${this.songsURL}/${id}`, body);
   }
 
 }

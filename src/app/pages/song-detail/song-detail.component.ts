@@ -23,12 +23,15 @@ export class SongDetailComponent {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this._apiServiceService.setLoadingStatus(true);
+
     this._apiServiceService.getArtists().subscribe({
       next: (data) =>
         (this.artists = data.map((artist) => {
           return { id: Number(artist.id), name: artist.name };
         })),
       error: (err) => console.error(err),
+      complete: () => this._apiServiceService.setLoadingStatus(false),
     });
 
     const url = this.route.snapshot.url;
