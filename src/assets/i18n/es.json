@@ -3,8 +3,31 @@
         "songs": "Canciones",
         "artists": "Artistas",
         "companies": "Compañías discográficas",
-
         "new-song": "Nueva canción"
+    },
+    "menu": {
+        "songs": "Canciones",
+        "artists": "Artistas",
+        "companies": "Compañías discográficas",
+        "menu": "Menu"
+    },
+    "form": {
+        "title": "Título",
+        "title-error": "El campo título es obligatorio",
+        "year": "Año",
+        "year-error": "El campo año es obligatorio",
+        "rating": "Puntuación",
+        "rating-error": "El campo puntuación es obligatorio",
+        "duration": "Duración",
+        "duration-error": "El campo duración es obligatorio",
+        "singer": "cantante",
+        "singer-error": "El campo cantante es obligatorio",
+        "choose-a-singer": "Elige un cantante",
+        "style": "Estilo",
+        "add-style": "Añadir estilo",
+        "save": "Guardar"
+
+
     },
     "apologyze": {
         "page-in-progress": "Página temporalmente no disponible. Disculpa el inconveniente.",

@@ -1,7 +1,7 @@
 <div class="menu-container" [ngClass]="{ display: displayMenu }">
   <div class="left-menu bg-white pr-4 border-gray-500">
     <div class="flex p-4 mb-16 justify-between text-2xl">
-      <div>Menu</div>
+      <div>{{ "menu.menu" | transloco }}</div>
       <fa-icon [icon]="faXmark" (click)="closeModal()"></fa-icon>
     </div>
     <div
@@ -9,9 +9,8 @@
       (click)="navigate(section.url)"
       class="p-4 border-b border-gray-500 flex justify-between"
     >
-    <span>{{ section.label }}</span>
-    <fa-icon [icon]="faArrowRight"></fa-icon>
-      
+      <span>{{ section.label | transloco }}</span>
+      <fa-icon [icon]="faArrowRight"></fa-icon>
     </div>
   </div>
   <div class="under-lay" (click)="closeModal()"></div>
