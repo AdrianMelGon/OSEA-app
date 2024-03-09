@@ -1,11 +1,29 @@
-<div *ngIf="artists.length > 0">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
+<div *ngIf="artists.length > 0" class="flex justify-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4 w-11/12">
     <div class="">
       <mat-form-field class="w-full">
         <mat-label>{{ "form.title" | transloco }}</mat-label>
-        <input matInput formControlName="title" placeholder="title" />
+        <input
+          matInput
+          formControlName="title"
+          [placeholder]="_translocoService.translate('form.title')"
+        />
         <mat-error *ngIf="form.get('title')?.hasError('required')">{{
           "form.title-error" | transloco
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="">
+      <mat-form-field class="w-full">
+        <mat-label>{{ "form.poster" | transloco }}</mat-label>
+        <input
+          type="url"
+          matInput
+          formControlName="poster"
+          [placeholder]="_translocoService.translate('form.poster-song')"
+        />
+        <mat-error *ngIf="form.get('poster')?.hasError('required')">{{
+          "form.poster-error" | transloco
         }}</mat-error>
       </mat-form-field>
     </div>
@@ -27,7 +45,7 @@
           type="number"
           matInput
           formControlName="rating"
-          placeholder="rating"
+          [placeholder]="_translocoService.translate('form.rating')"
         />
         <mat-error *ngIf="form.get('rating')?.hasError('required')">{{
           "form.rating-error" | transloco
@@ -41,7 +59,7 @@
           type="number"
           matInput
           formControlName="duration"
-          placeholder="duration"
+          [placeholder]="_translocoService.translate('form.duration')"
         />
         <mat-error *ngIf="form.get('duration')?.hasError('required')">{{
           "form.duration-error" | transloco
@@ -66,7 +84,7 @@
     <div class="flex items-center">
       <mat-form-field>
         <mat-label>{{ "form.style" | transloco }}</mat-label>
-        <input matInput formControlName="newGenre" placeholder="Nuevo valor" />
+        <input matInput formControlName="newGenre" [placeholder]="_translocoService.translate('form.new-style')" />
       </mat-form-field>
       <button
         class="ml-4"

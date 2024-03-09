@@ -14,6 +14,9 @@
     "form": {
         "title": "Título",
         "title-error": "El campo título es obligatorio",
+        "poster": "Poster",
+        "poster-error": "El poster título es obligatorio",
+        "poster-song": "Poster de la canción",
         "year": "Año",
         "year-error": "El campo año es obligatorio",
         "rating": "Puntuación",
@@ -25,6 +28,7 @@
         "choose-a-singer": "Elige un cantante",
         "style": "Estilo",
         "add-style": "Añadir estilo",
+        "new-style": "Nuevo estilo",
         "save": "Guardar"
 
 
