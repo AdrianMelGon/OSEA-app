@@ -25,7 +25,8 @@ export class HeaderComponent {
     this._navigationService.getUrl().subscribe((data) => {
       const segments = data.split('/');
       const lastSegment = segments[segments.length - 1];
-      if (segments[segments.length - 2] === 'songs' && lastSegment !== 'edit') {
+
+      if (/^\d+$/.test(lastSegment)) {
         this._apiServiceService.getCurrentSong().subscribe((data) => {
           this.headerText = data;
         });
