@@ -1,5 +1,5 @@
-<div *ngIf="artists.length > 0">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
+<div *ngIf="artists.length > 0" class="flex justify-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4 w-11/12">
     <div class="">
       <mat-form-field class="w-full">
         <mat-label>{{ "form.title" | transloco }}</mat-label>
