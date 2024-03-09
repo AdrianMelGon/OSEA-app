@@ -2,16 +2,16 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4">
     <div class="">
       <mat-form-field class="w-full">
-        <mat-label>title</mat-label>
+        <mat-label>{{ "form.title" | transloco }}</mat-label>
         <input matInput formControlName="title" placeholder="title" />
-        <mat-error *ngIf="form.get('title')?.hasError('required')"
-          >Title is required</mat-error
-        >
+        <mat-error *ngIf="form.get('title')?.hasError('required')">{{
+          "form.title-error" | transloco
+        }}</mat-error>
       </mat-form-field>
     </div>
     <div class="">
       <mat-form-field class="w-full">
-        <mat-label>Choose a date</mat-label>
+        <mat-label>{{ "form.year" | transloco }}</mat-label>
         <input matInput formControlName="year" [matDatepicker]="year" />
         <mat-datepicker-toggle
           matIconSuffix
@@ -22,54 +22,51 @@
     </div>
     <div class="">
       <mat-form-field class="w-full">
-        <mat-label>rating</mat-label>
+        <mat-label>{{ "form.rating" | transloco }}</mat-label>
         <input
           type="number"
           matInput
           formControlName="rating"
           placeholder="rating"
         />
-        <mat-error *ngIf="form.get('rating')?.hasError('required')"
-          >rating is required</mat-error
-        >
+        <mat-error *ngIf="form.get('rating')?.hasError('required')">{{
+          "form.rating-error" | transloco
+        }}</mat-error>
       </mat-form-field>
     </div>
     <div class="">
       <mat-form-field class="w-full">
-        <mat-label>duration</mat-label>
+        <mat-label>{{ "form.duration" | transloco }}</mat-label>
         <input
           type="number"
           matInput
           formControlName="duration"
           placeholder="duration"
         />
-        <mat-error *ngIf="form.get('duration')?.hasError('required')"
-          >duration iis required</mat-error
-        >
+        <mat-error *ngIf="form.get('duration')?.hasError('required')">{{
+          "form.duration-error" | transloco
+        }}</mat-error>
       </mat-form-field>
     </div>
     <div class="">
       <mat-form-field class="w-full">
         <mat-select
           formControlName="artist"
-          placeholder="Selecciona una opción"
+          [placeholder]="_translocoService.translate('form.choose-a-singer')"
         >
           <mat-option *ngFor="let singer of artists" [value]="singer.id">{{
             singer.name
           }}</mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('artist')?.hasError('required')"
-          >Debes seleccionar un cantante</mat-error
+          >{{ "form.singer-error" | transloco }}e</mat-error
         >
       </mat-form-field>
     </div>
     <div class="flex items-center">
       <mat-form-field>
-        <mat-label>Añadir nuevo estilo</mat-label>
+        <mat-label>{{ "form.style" | transloco }}</mat-label>
         <input matInput formControlName="newGenre" placeholder="Nuevo valor" />
-        <mat-error *ngIf="form.get('newGenre')?.hasError('required')"
-          >El nuevo valor es requerido</mat-error
-        >
       </mat-form-field>
       <button
         class="ml-4"
@@ -78,7 +75,7 @@
         color="primary"
         (click)="addNewGenre()"
       >
-        Añadir
+        {{ "form.add-style" | transloco }}
       </button>
     </div>
 
@@ -92,7 +89,7 @@
     </mat-chip-listbox>
     <div class="flex p-8 justify-center">
       <button class="w-full" mat-raised-button color="primary" type="submit">
-        Submit
+        {{ "form.save" | transloco }}
       </button>
     </div>
   </form>

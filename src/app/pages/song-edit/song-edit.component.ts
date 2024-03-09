@@ -13,12 +13,15 @@ import { ActivatedRoute } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslocoModule } from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
 @Component({
   selector: 'app-song-edit',
   standalone: true,
   imports: [
     CommonModule,
     FormsModule,
+    TranslocoModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatDatepickerModule,
@@ -35,6 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class SongEditComponent {
   private _apiServiceService: ApiServiceService = inject(ApiServiceService);
+  public _translocoService: TranslocoService = inject(TranslocoService);
+
   public artists = <any[]>[];
   public song = <any>null;
   newGenres: string[] = [];
