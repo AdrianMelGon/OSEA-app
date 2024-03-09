@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiServiceService } from './../../services';
+import { ApiServiceService, NavigationService } from './../../services';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslocoModule } from '@ngneat/transloco';
@@ -39,6 +38,7 @@ import { TranslocoService } from '@ngneat/transloco';
 export class SongEditComponent {
   private _apiServiceService: ApiServiceService = inject(ApiServiceService);
   public _translocoService: TranslocoService = inject(TranslocoService);
+  private _navigationService: NavigationService = inject(NavigationService);
 
   public artists = <any[]>[];
   public song = <any>null;
@@ -48,7 +48,6 @@ export class SongEditComponent {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef
   ) {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
@@ -61,12 +60,15 @@ export class SongEditComponent {
   }
 
   ngOnInit() {
+    this._apiServiceService.setLoadingStatus(true);
+
     this._apiServiceService.getArtists().subscribe({
       next: (data) =>
         (this.artists = data.map((artist) => {
           return { id: Number(artist.id), name: artist.name };
         })),
       error: (err) => console.error(err),
+      complete: () => this._apiServiceService.setLoadingStatus(false),
     });
 
     const url = this.route.snapshot.url;
@@ -95,7 +97,6 @@ export class SongEditComponent {
         complete: () => this._apiServiceService.setLoadingStatus(false),
       });
     }
-    this.cdr.detectChanges();
   }
 
   addNewGenre() {
@@ -111,31 +112,33 @@ export class SongEditComponent {
   }
 
   onSubmit() {
-    // if (this.form.valid) {
+    if (this.form.valid) {
       let body = this.form.value;
       delete body.newGenre;
       const year = this.form.get('year')?.value;
       body.year = year.getFullYear();
 
-
-
       body.genre = this.newGenres;
       this._apiServiceService.setLoadingStatus(true);
-      // if (this.song) {
-      //   //Update song
-      //   this._apiServiceService.updateSong(this.song.id, body).subscribe({
-      //     next: (resp) => console.log(resp),
-      //     error: (err) => console.log(err),
-      //     complete: () => this._apiServiceService.setLoadingStatus(false),
-      //   });
-      // } else {
-      //   //Create song
-      //   this._apiServiceService.createSong(body).subscribe({
-      //     next: (resp) => console.log(resp),
-      //     error: (err) => console.log(err),
-      //     complete: () => this._apiServiceService.setLoadingStatus(false),
-      //   });
-      // }
-    // } 
+      if (this.song) {
+        //Update song
+        this._apiServiceService.updateSong(this.song.id, body).subscribe({
+          next: (resp) => {
+            this._navigationService.navigate(`songs/${this.song.id}`);
+          },
+          error: (err) => console.log(err),
+          complete: () => this._apiServiceService.setLoadingStatus(false),
+        });
+      } else {
+        //Create song
+        this._apiServiceService.createSong(body).subscribe({
+          next: (resp) => {
+            this._navigationService.navigate(`songs/${resp.id}`);
+          },
+          error: (err) => console.log(err),
+          complete: () => this._apiServiceService.setLoadingStatus(false),
+        });
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ApiServiceService } from './../../services';
 import { CardComponent, FloatButtonComponent } from './../../components';
 import { CommonModule } from '@angular/common';
@@ -11,8 +11,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './songs.component.scss',
 })
 export class SongsComponent {
+  private _apiServiceService: ApiServiceService = inject(ApiServiceService);
+
   public songs = <any[]>[];
-  constructor(private _apiServiceService: ApiServiceService) {}
   ngOnInit(): void {
     this._apiServiceService.setLoadingStatus(true);
     this._apiServiceService.getSongs().subscribe({
